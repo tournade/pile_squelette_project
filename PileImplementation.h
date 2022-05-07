@@ -13,7 +13,11 @@
  * @param capacite_maximale Nombre maximal d'éléments dans la pile à tout moment.
  */
 template<typename T>
-Pile<T>::Pile(std::size_t capacite_maximale){}
+Pile<T>::Pile(std::size_t capacite_maximale){
+    if(capacite_maximale <= 0){
+        throw std::invalid_argument("la pile doit etre superieur a 0");
+    }
+}
 
 /**
  * @brief Ajoute un élément sur la pile.
@@ -43,7 +47,11 @@ T Pile<T>::pop() {
  */
 template<typename T>
 bool Pile<T>::vide() const {
-    return false ;
+    bool result = false;
+    if (pile.size() == 0){
+        result = true;
+    }
+    return result ;
 }
 
 /**
