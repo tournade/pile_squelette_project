@@ -11,34 +11,58 @@ TEST(Pile, constructeur_noexcept) {
 TEST(Pile, constructeur_capacite_non_valide_throw) {
     EXPECT_THROW(Pile<int> a(0),std::invalid_argument) ;
 }
-/*
+
 TEST(Pile, pop_pile_vide_throw) {
+    Pile<int> p(1);
+    EXPECT_THROW(p.pop(),std::runtime_error) ;
 
-
-    EXPECT_EQ(0, 1) ;
 }
 TEST(Pile, push_pile_pleine_throw) {
-    EXPECT_EQ(0, 1) ;
+    Pile<int> z(1);
+    z.push(10);
+    EXPECT_THROW(z.push(2),std::runtime_error) ;
+
+
 }
-*/
 TEST(Pile, pile_initiale_vide) {
     Pile<char> b(2);
 
     EXPECT_TRUE(b.vide());
 }
-/*
+
 TEST(Pile, push_non_vide) {
-    EXPECT_EQ(0, 1) ;
+    Pile<int> f(2);
+    f.push(4);
+    EXPECT_FALSE(f.vide()) ;
 }
 
 TEST(Pile, push_pop_recupere_valeur) {
-    EXPECT_EQ(0, 1) ;
+    Pile<double> t(3);
+    t.push(562);
+    double result = t.pop();
+    EXPECT_EQ(562,result) ;
 }
 
 TEST(Pile, push_pop_redevient_vide) {
-    EXPECT_EQ(0, 1) ;
+
+    Pile<char> b(2);
+    b.push('t');
+    b.pop();
+    EXPECT_TRUE(b.vide());
 }
 
 TEST(Pile, push_pop_sequence) {
-   EXPECT_EQ(0, 1) ;
-}*/
+    Pile<char> b(2);
+    b.push('t');
+
+    char r = b.pop();
+    EXPECT_EQ(r,'t');
+    EXPECT_TRUE(b.vide());
+    b.push('t');
+    b.push('e');
+    EXPECT_TRUE(b.pleine());
+    char q = b.pop();
+    char w = b.pop();
+    EXPECT_EQ(q,'e');
+    EXPECT_EQ(w,'t');
+}

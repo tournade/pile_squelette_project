@@ -17,6 +17,8 @@ Pile<T>::Pile(std::size_t capacite_maximale){
     if(capacite_maximale <= 0){
         throw std::invalid_argument("la pile doit etre superieur a 0");
     }
+    cardinal=capacite_maximale;
+
 }
 
 /**
@@ -26,7 +28,13 @@ Pile<T>::Pile(std::size_t capacite_maximale){
  * @except runtime_error si la pile est déjà remplie à capacité.
  */
 template<typename T>
-void Pile<T>::push(const T &valeur) {}
+void Pile<T>::push(const T &valeur) {
+    if(pleine()){
+        throw std::runtime_error("la pile est déjà remplie à capacité");
+    } else {
+        pile.push_back(valeur);
+    }
+}
 
 /**
  * @brief Retire un élément de la pile.
@@ -36,8 +44,15 @@ void Pile<T>::push(const T &valeur) {}
  */
 template<typename T>
 T Pile<T>::pop() {
-    T bidon ; 
-    return bidon ;
+    T result;
+    if(vide()){
+        throw std::runtime_error("la pile est vide");
+    } else {
+        result = pile.back();
+        pile.pop_back();
+    }
+
+    return result ;
 }
 
 /**
@@ -61,7 +76,12 @@ bool Pile<T>::vide() const {
  */
 template<typename T>
 bool Pile<T>::pleine() const {
-    return true ;
+    bool result = false;
+    if (pile.size() == cardinal) {
+        result = true;
+    }
+
+    return result ;
 }
 
 
